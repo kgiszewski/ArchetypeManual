@@ -17,7 +17,7 @@ namespace MyNamespace
 
             var archetypeValueAsString = contentService.GetById(1234).GetValue<string>("myArchetypeProperty");
 
-            var archetype = JsonConvert.DeserializeObject<ArchetypeModel>(archetypeValueAsString);
+            var archetype = JsonConvert.DeserializeObject<ArchetypeModel> (archetypeValueAsString);
 
             foreach (var fieldset in archetype)
             {
