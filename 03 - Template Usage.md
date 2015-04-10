@@ -1,6 +1,6 @@
 #Template Usage#
 
-Getting the data out of Umbraco is easy.  Consider the following:
+Getting the data out of Archetype is easy.  Consider the following:
 
 ```
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
@@ -34,7 +34,7 @@ Getting the data out of Umbraco is easy.  Consider the following:
     }
 }
 
-//use case #2; be able to iterate over the properties, however this will not pass value through converters
+//use case #3; be able to iterate over the properties, however this will not pass value through converters
 @foreach (var fieldset in Model.Content.GetPropertyValue<ArchetypeModel>("a1"))
 {
     <!-- will not go through value converters -->
