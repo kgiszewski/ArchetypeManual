@@ -30,3 +30,6 @@ Archetype can do many things but most people will only need a few features provi
 The best use case for Archetype occurs when you need a short list of collapsible fieldsets that contain other installed data types.  The best concrete example would be using hero sliders:
 
 ![sliders](assets/sliders.png)
+
+##Source##
+The source is open and located at: https://github.com/imulus/Archetype
