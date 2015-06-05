@@ -67,3 +67,87 @@ UrlPickerTemplate.getTitle = function (value, scope) {
 Finally, call your new function from inside the Archetype config (`{{UrlPickerTemplate.getTitle(picker)}}`).  Please note you pass the property alias to your function.  Your function then takes two arguments (value and scope).
 
 ![template](assets/label-template.png)
+
+As of v1.8, you can now pass arguments and take advantage of Archetype AngularJs services, for example you can now do this:
+
+```js
+var ArchetypeSampleLabelTemplates = (function() {
+
+    //public functions
+    return {
+        Entity: function (value, scope, args) {
+
+           if(!args.entityType) {
+                args = {entityType: "Document", propertyName: "name"}
+            }
+
+            if (value) {
+                //if handed a csv list, take the first only
+                var id = value.split(",")[0];
+
+                if (id) {
+                    var entity = scope.services.archetypeLabelService.getEntityById(scope, id, args.entityType);
+
+                    if(entity) {
+                        return entity[args.propertyName];
+                    }
+                }
+            }
+
+            return "";
+        },
+        UrlPicker: function(value, scope, args) {
+
+            if(!args.propertyName) {
+                args = {propertyName: "name"}
+            }
+
+            var entity;
+
+            switch (value.type) {
+                case "content":
+                    if(value.typeData.contentId) {
+                        entity = scope.services.archetypeLabelService.getEntityById(scope, value.typeData.contentId, "Document");
+                    }
+                    break;
+
+                case "media":
+                    if(value.typeData.mediaId) {
+                        entity = scope.services.archetypeLabelService.getEntityById(scope, value.typeData.mediaId, "Media");
+                    }
+                    break;
+
+                case "url":
+                    return value.typeData.url;
+                    
+                default:
+                    break;
+
+            }
+
+            if(entity) {
+                return entity[args.propertyName];
+            }
+
+            return "";
+        },
+        Rte: function (value, scope, args) {
+
+            if(!args.contentLength) {
+                args = {contentLength: 50}
+            }
+
+            return $(value).text().substring(0, args.contentLength);
+        }
+    }
+})();
+```
+>Please note that the above is just a sample of what you can do, it covers several label template functions.
+
+Note that you can take advantage of the built-in label service that handles some local caching for performance.  You pass arguments to you function by configuring your label template like so:
+
+```
+{{ArchetypeSampleLabelTemplates.UrlPicker(myproperty, {myarg: 1, myotherarg: 2})}}
+```
+
+There is also automatic detection built in for RTE, UrlPicker and MNTP so you don't even have to write a function any longer for those.
