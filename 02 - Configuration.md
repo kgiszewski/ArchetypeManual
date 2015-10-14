@@ -160,6 +160,7 @@ Archetype allows you to do the following to customize the backoffice experience 
 * Modify the CSS globally
 * Modify the CSS per Archetype data type instance
 * Add a JS script globally
+* Add a class name to an Archetype
 
 ###Global Changes###
 To make global changes, simply edit any of these files:
@@ -174,5 +175,6 @@ Archetype will allow you to also change the look and feel on a per data type bas
 
 * You can completely swap out the default view with another one. Navigate to `Developer>Data Types` and select your Archetype. Update the configuration property `View File` with a path to your new view file. v7.3+ users will find this under the `Custom Style/Script Options`. It's easiest to start with a copy of the `~/App_Plugins/Archetype/Views/archetype.default.html` file, make your changes and save it as a new view. Just remember to point your Archetype to the new view.
 * Next you can add CSS and JS conditionally to a page. Since Umbraco is a pretty much a single page app, you can inject a CSS and/or a JS file by simply specifying a path to a CSS or JS file in the Archetype configuration. Again v7.3+ users will find this under the `Custom Style/Script Options`.
-* Lastly, you can also quickly add a class to an Archetype for styling or JS purposes by specifying the `Custom Wrapper Class` field in the configuration.
+* Lastly, you can also quickly add a class to an Archetype for styling or JS purposes by specifying the `Custom Wrapper Class` field in the configuration. This can be used in conjunction with either the JS or CSS file options.
+
 >Note that these changes are resistant to upgrades of Archetype and will be kept without any worries unlike the global changes in the previous section.
