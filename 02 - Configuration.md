@@ -151,3 +151,25 @@ Note that you can take advantage of the built-in label service that handles some
 ```
 
 There is also automatic detection built in for RTE, UrlPicker and MNTP so you don't even have to write a function any longer for those.
+
+##Change the Style of Archetype in the Backoffice##
+Archetype allows you to do the following to customize the backoffice experience for your editors:
+
+* Modify the view globally
+* Modify the view per Archetype data type instance
+* Modify the CSS globally
+* Modify the CSS per Archetype data type instance
+* Add a JS script globally
+
+###Global Changes###
+To make global changes, simply edit any of these files:
+
+* Any file located in: `~/App_Plugins/Archetype/views/`
+* `~/App_Plugins/Archetype/css/archetype.css`
+
+Modifying these files will alter the look and feel of Archetype globally, however this is the same as modifying the core of Archetype and you'll have to make these changes after each upgrade to the next version of Archetype.
+
+###Per Data Type Instance##
+Archetype will allow you to also change the look and feel on a per data type basis as defined below:
+
+* You can completely swap out the default view with another one. Navigate to `Developer>Data Types` and select your Archetype. Update the configuration property `View File` with a path to your new view file. v7.3+ users will find this under the `Custom Style/Script Options`.
