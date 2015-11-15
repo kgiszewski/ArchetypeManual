@@ -61,7 +61,7 @@ Each partial would have to be defined in the `~/Views/Partials/Archetype` folder
 
 <div class="row">
     <div class="content col-lg-12">
-        @Html.Raw(Model.GetValue("text")
+        @Html.Raw(Model.GetValue("text"))
     </div>
 </div>
 ```
