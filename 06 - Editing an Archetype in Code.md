@@ -103,4 +103,4 @@ namespace MyApp
     }
 }
 ```
->Note if you want to create an Archetype instead of load it, just instantiate a new `ArchetypeModel` instead of loading and deserializing it.
+>Note if you want to create an Archetype instead of loading it, just instantiate a new `ArchetypeModel` instead of loading and deserializing it.
