@@ -15,3 +15,6 @@ If you just want the binaries and none of the frontend stuff:
 Type: `install-package Archetype.Binaries` in your Visual Studio NuGet Package Manager.
 
 https://www.nuget.org/packages/Archetype.Binaries/
+
+##Courier
+@leekelleher has gratiously donated his time to make a Courier extension to use Archetype with Umbraco as a Service (UaaS). You can install it here: https://www.nuget.org/packages/archetype.courier
