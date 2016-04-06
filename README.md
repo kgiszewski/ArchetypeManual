@@ -2,6 +2,9 @@
 
 Archetype is an Umbraco 7 property editor that wraps other installed property editors. By wrapping the other properties, Archetype allows for custom and repeatable fieldset mashups.
 
+##News and Updates##
+Follow us at: https://twitter.com/ArchetypeKit
+
 ![archetype](assets/archetype.png)
 
 ##Features at a Glance##
