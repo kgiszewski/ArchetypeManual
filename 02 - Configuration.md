@@ -27,7 +27,15 @@ This will expose a hidden plus sign that allows that you'll need to click to add
 
 ##Nested Archetypes##
 
-You can even nest Archetypes within Archetypes provided they are not referencing themselves.
+You can nest Archetypes within Archetypes; they can even reference themselves (supposing you also start with the add button to avoid infinite nesting).
+
+##Cross-Archetype Dragging##
+
+To allow for Archetype fieldsets to be dragged between Umbraco properties and into/out of nested Archetypes, check the "Enabled Cross-Archetype Dragging" configuration option.
+
+Once enabled, you will be able to drag compatible Archetype fieldsets to other Archetypes, whether they are entirely different properties or they are nested Archetypes:
+
+![Cross-Archetype Dragging Example Animation](assets/cross-drag.gif)
 
 ##Label Template##
 
