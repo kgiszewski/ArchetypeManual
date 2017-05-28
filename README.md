@@ -1,16 +1,16 @@
-#Archetype#
+# Archetype #
 
 Archetype is an Umbraco 7 property editor that wraps other installed property editors. By wrapping the other properties, Archetype allows for custom and repeatable fieldset mashups.
 
-##News and Updates##
+## News and Updates ##
 Follow us at: https://twitter.com/ArchetypeKit
 
 ![archetype](assets/archetype.png)
 
-##Features at a Glance##
+## Features at a Glance ##
 Archetype can do many things but most people will only need a few features provided below:
 
-###Basic###
+### Basic ###
 * Create groupings (fieldsets) of installed data types
 * Enable/disable fieldsets or delete them
 * Sortable fieldsets
@@ -21,7 +21,7 @@ Archetype can do many things but most people will only need a few features provi
 * Toggle collapsing behavior
 * Clone fieldsets
 
-###Advanced###
+### Advanced ###
 * Multiple types of fieldsets mixed together
 * Add custom CSS
 * Add custom JS
@@ -29,10 +29,10 @@ Archetype can do many things but most people will only need a few features provi
 * Enable route hijacking by your server side code 
 * Disable the built-in property value converter so you can implement your own
 
-##Use Cases##
+## Use Cases ##
 The best use case for Archetype occurs when you need a short list of collapsible fieldsets that contain other installed data types.  The best concrete example would be using hero sliders:
 
 ![sliders](assets/sliders.png)
 
-##Source##
+## Source ##
 The source is open and located at: https://github.com/imulus/Archetype
