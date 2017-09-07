@@ -1,4 +1,4 @@
-#Template Usage#
+# Template Usage
 
 Getting the data out of Archetype is easy.  Consider the following:
 
@@ -45,7 +45,7 @@ Getting the data out of Archetype is easy.  Consider the following:
 }
 ```
 
-##Page Builder##
+## Page Builder
 You can even render partials based on the alias of the fieldset easily.   If you have an Archetype that has more than one fieldset configured with aliases of `RichtextModule` and `GalleryModule`, then you can render them dynamically with one line of code: 
 
 `@Html.RenderArchetypePartials(Model.Content.GetPropertyValue<ArchetypeModel>("modules"))`
