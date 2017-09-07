@@ -1,4 +1,4 @@
-#Deserialize Archetype#
+# Deserialize Archetype
 
 Often you may find yourself needing to work with the individual data in code.  The following example shows how to deserialize an Archetype from `IContent`:
 
