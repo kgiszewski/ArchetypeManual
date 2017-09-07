@@ -1,4 +1,4 @@
-#Configuration#
+# Configuration
 
 Configuration can seem daunting, but to create your first Archetype, do the the following:
 
@@ -16,20 +16,20 @@ That is all that is required.
 
 Tick the `Toggle Advanced Options` box to expose advanced options.
 
-##Add to a Document Type##
+## Add to a Document Type
 Once configured, navigate to `Settings->Document Types` and add the new data type to a document type.
 
-##Multiple Fieldsets##
+## Multiple Fieldsets
 
 You can enable multiple fieldsets in a single Archetype by going into the advanced options and ticking `Enable Multiple Fieldsets?`.
 
 This will expose a hidden plus sign that allows that you'll need to click to add another fieldset type.  It also allows you to choose an installed icon to separate the two types visually once added to a document type.
 
-##Nested Archetypes##
+## Nested Archetypes
 
 You can nest Archetypes within Archetypes; they can even reference themselves (supposing you also start with the add button to avoid infinite nesting).
 
-##Cross-Archetype Dragging##
+## Cross-Archetype Dragging
 
 To allow for Archetype fieldsets to be dragged between Umbraco properties and into/out of nested Archetypes, check the "Enabled Cross-Archetype Dragging" configuration option.
 
@@ -37,7 +37,7 @@ Once enabled, you will be able to drag compatible Archetype fieldsets to other A
 
 ![Cross-Archetype Dragging Example Animation](assets/cross-drag.gif)
 
-##Label Template##
+## Label Template
 
 You can configure Archetype to show a value from inside your Archetype to be shown on the collapsed fieldset title.
 
@@ -160,7 +160,7 @@ Note that you can take advantage of the built-in label service that handles some
 
 There is also automatic detection built in for RTE, UrlPicker and MNTP so you don't even have to write a function any longer for those.
 
-##Change the Style of Archetype in the Backoffice##
+## Change the Style of Archetype in the Backoffice
 Archetype allows you to do the following to customize the backoffice experience for your editors:
 
 * Modify the view globally
@@ -170,7 +170,7 @@ Archetype allows you to do the following to customize the backoffice experience 
 * Add a JS script globally
 * Add a class name to an Archetype
 
-###Global Changes###
+### Global Changes
 To make global changes, simply edit any of these files:
 
 * Any file located in: `~/App_Plugins/Archetype/views/`
@@ -178,7 +178,7 @@ To make global changes, simply edit any of these files:
 
 >Modifying these files will alter the look and feel of Archetype globally, however this is the same as modifying the core of Archetype and you'll have to make these changes after each upgrade to the next version of Archetype.
 
-###Per Data Type Instance##
+### Per Data Type Instance
 Archetype will allow you to also change the look and feel on a per data type basis as defined below:
 
 * You can completely swap out the default view with another one. Navigate to `Developer>Data Types` and select your Archetype. Update the configuration property `View File` with a path to your new view file. v7.3+ users will find this under the `Custom Style/Script Options`. It's easiest to start with a copy of the `~/App_Plugins/Archetype/Views/archetype.default.html` file, make your changes and save it as a new view. Just remember to point your Archetype to the new view.
