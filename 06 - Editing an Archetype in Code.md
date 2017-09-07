@@ -1,4 +1,4 @@
-#Editing an Archetype in Code
+# Editing an Archetype in Code
 
 Often times you may want to edit an Archetype or create a new one altogether. The following example illustrates how to retrieve an Archetype from `ContentService`, edit it and save it back.
 
