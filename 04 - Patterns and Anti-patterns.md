@@ -1,4 +1,4 @@
-#Patterns and Anti-patterns#
+# Patterns and Anti-patterns
 
 * Do use Archetype when needing to group data together when you don't want to use the common Multinode Tree Picker pattern.
 * Do use the built-in property value conversions by getting your data like so:
