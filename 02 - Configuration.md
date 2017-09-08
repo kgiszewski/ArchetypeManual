@@ -160,6 +160,79 @@ Note that you can take advantage of the built-in label service that handles some
 
 There is also automatic detection built in for RTE, UrlPicker and MNTP so you don't even have to write a function any longer for those.
 
+### Promises and Dependency Injection in Label Templates
+
+Starting with Archetype 1.6.0, you can create label template functions that
+return promises and that support injection of AngularJS dependencies. This
+comes in handy for more advanced scenarios, such as when you need to perform
+asynchronous operations like getting data from the web server.
+
+In most instances where you would use a promise, you will want to inject an
+AngularJS dependency that has a function that returns a promise. So, you'll
+first want to know how to have dependencies injected. You can do so like this:
+
+```js
+function getNodeUrl(value) {
+    return function ($http) {
+        /* Your code here. */
+    };
+}
+```
+
+That will allow you to inject the `$http` service. All you need to do in order
+to have a dependency injected is return a function with that dependency as
+one of the parameters.
+
+Taking this example further, you could then return a promise from the function:
+
+```js
+function getNodeUrl(value) {
+    return function ($http) {
+        var options = {
+            params: {
+                nodeId: value
+            }
+        };
+        return $http.get("/umbraco/acme/nodeapi/details", options)
+            .then(function (response) {
+                return response.url || "Unknown URL";
+            });
+    };
+}
+```
+
+Note that for this to actually work you will need to build out the appropriate
+server-side API.
+
+Also, you will likely want to add some caching so subsequent requests to your
+function don't initiate server-side calls every time it is called. Here's an
+example of how you might go about that:
+
+```js
+function getNodeUrl(value) {
+    if (getNodeUrl.cache[value]) {
+        return getNodeUrl.cache[value];
+    }
+    return function ($http) {
+        var options = {
+            params: {
+                nodeId: value
+            }
+        };
+        return $http.get("/umbraco/acme/nodeapi/details", options)
+            .then(function (response) {
+                getNodeUrl.cache[value] = response.url || "Unknown URL";
+                return getNodeUrl.cache[value];
+            });
+    };
+}
+```
+
+Note that this demonstrates that you can return different types of objects
+from your function at different times. In the case of a cache hit, this will
+return a string. In the case of a cache miss, this will return a function that
+will return a promise that will resolve to a string.
+
 ## Change the Style of Archetype in the Backoffice
 Archetype allows you to do the following to customize the backoffice experience for your editors:
 
