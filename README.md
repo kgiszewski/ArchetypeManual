@@ -37,4 +37,4 @@ The best use case for Archetype occurs when you need a short list of collapsible
 Get up and running in 15 minutes! https://www.youtube.com/watch?v=79LksNwGjLk
 
 ## Source ##
-The source is open and located at: https://github.com/imulus/Archetype
+The source is open and located at: https://github.com/kgiszewski/Archetype
