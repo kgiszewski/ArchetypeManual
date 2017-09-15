@@ -45,6 +45,8 @@ Typically you would use this syntax in the `Label Template` box: `{{propertyName
 
 You can pass in a custom function into the label with the following syntax `{{myFunction(propertyName)}}`.
 
+You can pass args to your label template too, please keep reading thru the examples if interested.
+
 Make sure your function is available to Umbraco by adding your custom code to a package manifest.
 
 ### Promises and Dependency Injection in Label Templates
@@ -189,11 +191,15 @@ ArchetypeSampleLabelHelpers.testPromise = function(value) {
     }
 }
 
-ArchetypeSampleLabelHelpers.testEntityPromise = function(value) {          
+ArchetypeSampleLabelHelpers.testEntityPromise = function(value, scope, args) {
+    //hey look, args!
+    //{{ArchetypeSampleLabelHelpers.testEntityPromise(someArchetypePropertyAlias, {foo: 1})}}
+    console.log(args);
+    
     return function ($q, entityResource) {    
         var deferred = $q.defer();
     
-        entityResource.getById(1054, 'document').then(function(entity) {
+        entityResource.getById(args.foo, 'document').then(function(entity) {
             console.log("Hello from testEntityPromise");
             console.log(entity);
             deferred.resolve(entity.name);
