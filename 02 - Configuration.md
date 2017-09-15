@@ -43,126 +43,13 @@ You can configure Archetype to show a value from inside your Archetype to be sho
 
 Typically you would use this syntax in the `Label Template` box: `{{propertyName}}`.
 
-Using the above syntax will get the value of the property and use it as the label.  However some data types have a complex model value and therefore it doesn't make sense to do so.  The following example shows how to grab the title field from the [UrlPicker](https://www.nuget.org/packages/UrlPicker/) data type and use it as the label:
+You can pass in a custom function into the label with the following syntax `{{myFunction(propertyName)}}`.
 
-First we will need to add some code to our project by registering it with a `package.manifest` file at `~/App_Plugins/ArchetypeLabelTemplates/package.manifest`:
-
-```
-{
-  "javascript": [
-    "~/App_Plugins/ArchetypeLabelTemplates/urlpicker.js"
-  ]
-}
-```
-
-Then create your `urlpicker.js` file at the above location and define a function:
-
-```
-var UrlPickerTemplate = {};
- 
-UrlPickerTemplate.getTitle = function (value, scope) { 
-    //this is the property model
-    if (value) {
-        return value.meta.title;
-    }
-    
-    //if you wanted to get the name of the content instead, you'd have to get it from the server here since it's not in the model
- 
-    return "";
-};
-```
-
-Finally, call your new function from inside the Archetype config (`{{UrlPickerTemplate.getTitle(picker)}}`).  Please note you pass the property alias to your function.  Your function then takes two arguments (value and scope).
-
-![template](assets/label-template.png)
-
-As of v1.8, you can now pass arguments and take advantage of Archetype AngularJs services, for example you can now do this:
-
-```js
-var ArchetypeSampleLabelTemplates = (function() {
-
-    //public functions
-    return {
-        Entity: function (value, scope, args) {
-
-           if(!args.entityType) {
-                args = {entityType: "Document", propertyName: "name"}
-            }
-
-            if (value) {
-                //if handed a csv list, take the first only
-                var id = value.split(",")[0];
-
-                if (id) {
-                    var entity = scope.services.archetypeLabelService.getEntityById(scope, id, args.entityType);
-
-                    if(entity) {
-                        return entity[args.propertyName];
-                    }
-                }
-            }
-
-            return "";
-        },
-        UrlPicker: function(value, scope, args) {
-
-            if(!args.propertyName) {
-                args = {propertyName: "name"}
-            }
-
-            var entity;
-
-            switch (value.type) {
-                case "content":
-                    if(value.typeData.contentId) {
-                        entity = scope.services.archetypeLabelService.getEntityById(scope, value.typeData.contentId, "Document");
-                    }
-                    break;
-
-                case "media":
-                    if(value.typeData.mediaId) {
-                        entity = scope.services.archetypeLabelService.getEntityById(scope, value.typeData.mediaId, "Media");
-                    }
-                    break;
-
-                case "url":
-                    return value.typeData.url;
-                    
-                default:
-                    break;
-
-            }
-
-            if(entity) {
-                return entity[args.propertyName];
-            }
-
-            return "";
-        },
-        Rte: function (value, scope, args) {
-
-            if(!args.contentLength) {
-                args = {contentLength: 50}
-            }
-
-            return $(value).text().substring(0, args.contentLength);
-        }
-    }
-})();
-```
->Please note that the above is just a sample of what you can do, it covers several label template functions.
-
-Note that you can take advantage of the built-in label service that handles some local caching for performance.  You pass arguments to you function by configuring your label template like so:
-
-```
-{{ArchetypeSampleLabelTemplates.UrlPicker(myproperty, {myarg: 1, myotherarg: 2})}}
-```
-
-There is also automatic detection built in for RTE, UrlPicker and MNTP so you don't even have to write a function any longer for those.
+Make sure your function is available to Umbraco by adding your custom code to a package manifest.
 
 ### Promises and Dependency Injection in Label Templates
 
-Starting with Archetype 1.6.0, you can create label template functions that return promises and that support injection of AngularJS dependencies. This comes in handy for more advanced scenarios, such as when you need to perform asynchronous operations like getting data from the web server.
+Starting with Archetype 1.16.0, you can create label template functions that return promises and that support injection of AngularJS dependencies. This comes in handy for more advanced scenarios, such as when you need to perform asynchronous operations like getting data from the web server.
 
 In most instances where you would use a promise, you will also want to inject an AngularJS dependency that has a function that returns a promise. So, you'll first want to know how to have dependencies injected. You can do so like this:
 
@@ -281,6 +168,53 @@ function archetypeGetNodeUrl(value) {
             });
     };
     
+}
+```
+
+### Addtional Samples
+```js
+//create a namespace (optional)
+var ArchetypeSampleLabelHelpers = {};
+
+//create a function
+//you will add it to your label template field as `{{ArchetypeSampleLabelHelpers.testPromise(someArchetypePropertyAlias)}}`
+ArchetypeSampleLabelHelpers.testPromise = function(value) {   
+    //you can inject services
+    return function ($timeout, archetypeCacheService) {        
+        //best to return a promise
+        //NOTE: $timeout returns a promise
+        return $timeout(function () {
+            return "As Promised: " + value;
+        }, 1000);
+    }
+}
+
+ArchetypeSampleLabelHelpers.testEntityPromise = function(value) {          
+    return function ($q, entityResource) {    
+        var deferred = $q.defer();
+    
+        entityResource.getById(1054, 'document').then(function(entity) {
+            console.log("Hello from testEntityPromise");
+            console.log(entity);
+            deferred.resolve(entity.name);
+        });
+    
+        return deferred.promise;
+    }
+}
+
+ArchetypeSampleLabelHelpers.testEntityPromise2 = function(value) {          
+    return function ($q, archetypeCacheService) {    
+        var deferred = $q.defer();
+    
+        archetypeCacheService.getEntityById(1054, 'document').then(function(entity) {
+            console.log("Hello from testEntityPromise2");
+            console.log(entity);
+            deferred.resolve(entity.name);
+        });
+    
+        return deferred.promise;
+    }
 }
 ```
 
